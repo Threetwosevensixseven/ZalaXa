@@ -98,7 +98,7 @@ CHAN_OPEN               equ $1601                       ; ROM routine to select 
 ChannelUpper            equ 2                           ; Channel 2 is the upper screen
 PR_STRING               equ $203C                       ; ROM routine to print a string of characters
 ULAPort                 equ $FE                         ; ULA port for setting the border and reading keys
-BinDir                  equ "..\bin"
+BinDir                  equ "..\..\bin"
 
 
 
