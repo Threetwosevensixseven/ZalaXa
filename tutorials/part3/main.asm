@@ -16,9 +16,9 @@ Start                   proc                            ; A named PROCedure (als
                         Print(MenuText, MenuText.Length); Print text on the screen using ROM routines
 WaitForSpace:                                           ; All labels inside procedures are local to that procedure
                         halt                            ; Wait for the next 1/50th second interrupt (like PAUSE 1)
-                        ld bc, zeuskeyaddr("[space]")   ; Get the IO address to input
+                        ld bc, zeuskeyaddr(" ")         ; Get the IO address to input
                         in a, (c)                       ; Read those 5 keys
-                        and zeuskeymask("[space]")      ; AND with the bit for SPACE
+                        and zeuskeymask(" ")            ; AND with the bit for SPACE
                         jr z SetupGame                  ; If it's zero the key is pressed
                         jp WaitForSpace                 ; Otherwise check keys again
 SetupGame:
@@ -98,14 +98,15 @@ CHAN_OPEN               equ $1601                       ; ROM routine to select 
 ChannelUpper            equ 2                           ; Channel 2 is the upper screen
 PR_STRING               equ $203C                       ; ROM routine to print a string of characters
 ULAPort                 equ $FE                         ; ULA port for setting the border and reading keys
-BinDir                  equ "..\..\bin"
+BinPath                 equ "..\bin"                    ; Relative to main.asm
+TapFile                 equ BinPath+"\ZalaXa.tap"       ; Filename of tap file
 
 
 
 ; Make tape file
 End                     equ $                           ; Calculate the last byte of our program
 Size                    equ End-Start                   ; Count the bytes to save to tape
-output_tap              BinDir+"\ZalaXa.tap", "ZalaXa", "seven-fff.com/zalaxa", Start, Size, 2, Start
+output_tap              TapFile, "ZalaXa", "seven-fff.com/zalaxa", Start, Size, 2, Start
                                                         ; Make a .TAP file. Parameters:
                                                         ;   1) the file name
                                                         ;   2) the name of the BASIC loader program
