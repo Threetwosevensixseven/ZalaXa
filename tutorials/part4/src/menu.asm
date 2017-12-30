@@ -17,12 +17,12 @@ pend
 
 
 SetupGame               proc
-                        call ClsAttr                    ; Clear the screen to prove we pressed space
-                        ld a, BTile.NirvanaDemo
-                        ld (Sprites.AIndex), a
-                        ld hl, $1000
-                        ld (Sprites.AColumn), hl
-                        call NIRVANA_start
+                        call ClsAttr                    ; Clear the 8x2 attributes for a fast CLS before setup
+                        ld a, BTile.NirvanaDemo         ; BTile.NirvanaDemo is 0 - the index of the first tile in the set
+                        ld (Sprites.AIndex), a          ; Set NIRVANA+ sprite A to this sprite index
+                        ld hl, $1000                    ; LSB is $00 (the column), MSB is $10 (the line, decimal 16)
+                        ld (Sprites.AColumn), hl        ; Set NIRVANA+ sprite A coords to 0, 16
+                        call NIRVANA_start              ; Enable NIRVANA+
                         ret
 pend
 

@@ -17,8 +17,8 @@ Main                    proc                            ; A named PROCedure (als
                         call SetupMenu
                         call SetupGame
 Loop:
-                        halt
-                        call AnimateDemo
+                        halt                            ; Wait until the next 50th second frame
+                        call AnimateDemo                ; Animate our monster
                         jp Loop                         ; Go into an endless loop (for now...)
 pend
 

@@ -6,7 +6,6 @@
 Stack                   equ Start-1                     ; Put our stack right below the program
 BinPath                 equ "..\bin"                    ; Relative to main.asm
 TapFile                 equ BinPath+"\ZalaXa.tap"       ; Filename of tap file
-//TapFile               equ zeussrcdir-"tutorials\part?"-"src"+"bin\ZalaXa.tap" ; Experimental syntax will work in a future version of Zeus
 
 
 
