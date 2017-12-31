@@ -39,7 +39,7 @@ include                 "nirvana+.asm"
 
 
 ; Make tape file
-End                     equ $                           ; Calculate the last byte of our program
+End                     equ NIRVANA_org+9054            ; Calculate the last byte of our program
 Size                    equ End-Start                   ; Count the bytes to save to tape
 output_tap              TapFile, "ZalaXa", "seven-fff.com/zalaxa", Start, Size, 2, Start
                                                         ; Make a .TAP file. Parameters:
