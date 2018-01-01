@@ -75,11 +75,10 @@ SetX:
                         ld (X), a                       ; Save it for next time (for the blank sprite underneath)
                         call CalculatePlayerX           ; Call the routine again for the new player X position
 AnimOffset equ $+1:     add a, SMC                      ; The X offset is returned in a, add the animation offset from AnimateDemo
-                        ld (Sprites.BIndex), a          ; Set tile index  for player sprite (current position)
+                        ld (Sprites.BIndex), a          ; Set tile index for player sprite (current position)
                         ex af, af'                      ; The column is returned in a'
                         ld (Sprites.BColumn), a         ; Set column for player sprite (current position)
                         ret
-
 pend
 
 
