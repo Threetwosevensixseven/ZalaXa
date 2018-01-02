@@ -54,5 +54,5 @@ Delta:                  ld (ix+0), c
 TopRow:
                         ClsAttrLine(0, BrightRedBlackP) ; 3) Clear top row of 8x8 attributes
                         ret
-endp
+pend
 

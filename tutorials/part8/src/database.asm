@@ -15,11 +15,6 @@ import_bin "..\tiles\blank.wtile"                       ; 008-008        1 x 1  
 pend
 
 
-Font                    proc
-  Namco:                import_bin "..\fonts\Namco.fzx"
-pend
-
-
 
 MenuText                proc                            ; Named procedure to keep our print data tidy
                         db At, 7, 13                    ; These codes are the same as you would use
@@ -39,22 +34,11 @@ pend                                                    ; ($ means the current a
 
 
 
-GameText                proc
-                        db At, 0, 0, "&UP"
-                        db At, 0, 94, "HIGH SCORE"
-                        db At, 9, 0, "0"
-                        db At, 9, 112, "20000"
-
-                        db 255
-pend
-
-
-
 ClsNirvanaGame          proc
                         db 128, BrightWhiteBlackP
-                        rept 11
+                        loop 11
                           db 255, BrightYellowBlackP
-                        endm
+                        lend
                         db 11, BrightYellowBlackP
                         db 0
 pend
