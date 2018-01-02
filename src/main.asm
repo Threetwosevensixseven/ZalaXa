@@ -31,6 +31,7 @@ include                 "utilities.asm"                 ; General purpose routin
 include                 "database.asm"                  ; Data tables and graphics tiles
 include                 "constants.asm"                 ; EQUates to make the code more readable
 include                 "macros.asm"                    ; Macro definitions to make the code more readable
+include                 "FZXdriver.asm"                 ; FZX proportional font routine
 include                 "nirvana+.asm"                  ; The NIRVANA+ multicolour graphics engine
 
 

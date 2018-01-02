@@ -26,6 +26,13 @@ SetupGame               proc
                         ld (MovePlayer.X), a            ; Set the playing horizontal starting position
                         ld a, 184                       ; 96 is the dead center in the vertical axis
                         ld (MovePlayer.Y), a            ; Set the playing vertical starting position
+
+                        ld hl, Font.Namco               ; Set FZX font
+                        ld (FZX_FONT), hl
+                        ld hl, GameText
+                        PrintTextHL()
+
+
                         call NIRVANA_start              ; Enable NIRVANA+
                         ret
 pend

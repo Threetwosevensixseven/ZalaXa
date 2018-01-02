@@ -15,6 +15,11 @@ import_bin "..\tiles\blank.wtile"                       ; 008-008        1 x 1  
 pend
 
 
+Font                    proc
+  Namco:                import_bin "..\fonts\Namco.fzx"
+pend
+
+
 
 MenuText                proc                            ; Named procedure to keep our print data tidy
                         db At, 7, 13                    ; These codes are the same as you would use
@@ -31,4 +36,11 @@ MenuText                proc                            ; Named procedure to kee
                         db Ink, Yellow, " TO START"
 Length                  equ $-MenuText                  ; Let Zeus do the work of calculating the length
 pend                                                    ; ($ means the current address Zeus is assembling to)
+
+
+
+GameText                proc
+                        db At, 0, 0, "&UP"
+                        db 255
+pend
 

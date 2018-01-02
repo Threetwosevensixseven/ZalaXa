@@ -18,3 +18,17 @@ PrintLoop:              ld de, TextAddress              ; Address of string to p
 
 mend
 
+
+
+PrintTextHL             macro()
+PrintMenu:              ld a, (hl)                      ; for each character of this string...
+                        cp 255
+                        jp z, Next                      ; check string terminator
+                        push hl                         ; preserve HL
+                        call FZX_START                  ; print character
+                        pop hl                          ; recover HL
+                        inc hl
+                        jp PrintMenu
+Next:
+mend
+
