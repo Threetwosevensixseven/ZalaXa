@@ -8,3 +8,4 @@ A series of blog tutorials exploring the idea of creating a simple <a href="http
 4.  <a href="https://seven-fff.com/blog/zalaxa-4-first-glimpse-of-multicolour/" target="_blank">First Glimpse of Multicolour</a> 
 5.  <a href="https://seven-fff.com/blog/zalaxa-5-wide-tiles/" target="_blank">Wide Tiles</a> 
 6.  <a href="https://seven-fff.com/blog/zalaxa-6-preshifting-sprites/" target="_blank">Preshifting Sprites</a> 
+7.  <a href="https://seven-fff.com/blog/zalaxa-7-moving-the-ship/" target="_blank">Moving the Ship</a> 
