@@ -11,8 +11,6 @@ SetupMenu               proc
                         ld hl, MenuText.FZX             ; Start of menu ASCII data
                         PrintTextHL()                   ; Macro to print FZX proportional text with FZX
 
-
-
 WaitForSpace:                                           ; All labels inside procedures are local to that procedure
                         halt                            ; Wait for the next 1/50th second interrupt (like PAUSE 1)
                         ld bc, zeuskeyaddr(" ")         ; Get the IO address to input

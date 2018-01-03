@@ -9,4 +9,7 @@ A series of blog tutorials exploring the idea of creating a simple <a href="http
 5.  <a href="https://seven-fff.com/blog/zalaxa-5-wide-tiles/" target="_blank">Wide Tiles</a> 
 6.  <a href="https://seven-fff.com/blog/zalaxa-6-preshifted-sprites/" target="_blank">Preshifted Sprites</a> 
 7.  <a href="https://seven-fff.com/blog/zalaxa-7-moving-the-ship/" target="_blank">Moving the Ship</a> 
-8.  <a href="https://seven-fff.com/blog/zalaxa-8-clearing-the-nirvana-screen/" target="_blank">Clearing the NIRVANA Screen</a>
+8.  <a href="https://seven-fff.com/blog/zalaxa-8-clearing-the-nirvana-screen/" target="_blank">Clearing the NIRVANA+ Screen</a>
+9.  <a href="https://seven-fff.com/blog/zalaxa-9-proportional-fonts-with-fzx/" target="_blank">Proportional Fonts with FZX</a>
+
+
