@@ -12,5 +12,4 @@ A series of blog tutorials exploring the idea of creating a simple <a href="http
 8.  <a href="https://seven-fff.com/blog/zalaxa-8-clearing-the-nirvana-screen/" target="_blank">Clearing the NIRVANA+ Screen</a>
 9.  <a href="https://seven-fff.com/blog/zalaxa-9-proportional-fonts-with-fzx/" target="_blank">Proportional Fonts with FZX</a>
 10. <a href="https://seven-fff.com/blog/zalaxa-10-a-naive-scoring-routine/" target="_blank">A Naïve Scoring Routine</a>
-
-
+11. <a href="https://seven-fff.com/blog/zalaxa-11-flashy-1upmanship/" target="_blank">Flashy 1UPmanship</a>
