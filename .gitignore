@@ -2,3 +2,6 @@
 /tutorials/*/ZeusBak
 /tutorials/bin
 /tutorials/*/src/ZeusBak
+/src/pasmo.exe
+/src/test.asm
+/src/test.tap
