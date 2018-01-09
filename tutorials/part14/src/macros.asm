@@ -79,7 +79,7 @@ ScrollStar              macro()
                         ld a, d                         ; Otherwise do
                         inc a                           ;   a pixel
                         ld d, a                         ;   scroll.
-                        ld (AnimateStars.Colour), a
+                        ld (SetupStars.Colour), a
                         inc (hl)                        ; Save px-scrolled offset back to StarField.Table.
                         jp Continue
 CharScroll:

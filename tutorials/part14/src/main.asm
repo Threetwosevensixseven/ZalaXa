@@ -13,6 +13,8 @@ Main                    proc                            ; A named PROCedure (als
 ::Start:
                         ld sp, Start                    ; Put our stack right below the program
                         Border(Black)                   ; Set the border to black using a helper macro
+                        ei
+                        jp SetupStars
                         call SetupMenu                  ; Display the menu and don't return until we press SPACE
                         call SetupGame                  ; Everything that might need resetting between the end
 Loop:                                                   ;   of a game and the start of the next one

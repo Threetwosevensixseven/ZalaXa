@@ -3,14 +3,7 @@
 
 
 SetupMenu               proc
-                        call ClsAttr
-                        ei
-                        halt
-                        di
-Randomize:
-                        call ClsPixels                  ; Clear all the pixels.
-
-
+                        call ClsAttr                    ; Call another named procedure to do a fast CLS (like GOSUB)
                         Print(MenuText, MenuText.Length); Print attributes on the screen using ROM routines
 
                         ld hl, Font.Namco               ; Set FZX font
@@ -18,21 +11,13 @@ Randomize:
                         ld hl, MenuText.FZX             ; Start of menu ASCII data
                         PrintTextHL()                   ; Macro to print FZX proportional text with FZX
 
-StarSeed equ $+1:       ld hl, $26B1
-                        ld de, StarField.Table
-                        ld bc, StarField.Length
-                        ldir
-WaitForSpace:
-                        ei
+WaitForSpace:                                           ; All labels inside procedures are local to that procedure
                         halt                            ; Wait for the next 1/50th second interrupt (like PAUSE 1)
-                        di
                         ld bc, zeuskeyaddr(" ")         ; Get the IO address to input
                         in a, (c)                       ; Read those 5 keys
                         and zeuskeymask(" ")            ; AND with the bit for SPACE
-                        ret z                             ; Otherwise return
-                        jp AnimateStars
-AnimateStarsRet:
-                        jp WaitForSpace
+                        jp nz, WaitForSpace             ; If it's zero the key is pressed
+                        ret                             ; Otherwise return
 pend
 
 
