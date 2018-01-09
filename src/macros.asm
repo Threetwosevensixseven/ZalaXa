@@ -69,3 +69,28 @@ NIRVANA_printC_Colour   macro(On)
                         ld (NIRVANA_paintC), a            ; <SMC
 mend
 
+
+
+ScrollStar              macro()
+                        ld a, d                         ; Retrieve the byte containing bits 0..2 of the Y coordinate.
+                        and %00000111                   ; Calculate Y mod 8 (0..7).
+                        cp %00000111                    ; If 7 then
+                        jp z, CharScroll                ;   do a character scroll.
+                        ld a, d                         ; Otherwise do
+                        inc a                           ;   a pixel
+                        ld d, a                         ;   scroll.
+                        inc (hl)                        ; Save px-scrolled offset back to StarField.Table.
+                        jp Continue
+CharScroll:
+                        ld a, e                         ; Retrieve the byte containing bits 3..4 of the Y coordinate.
+                        add 32                          ; Increment those two bits by one
+                        ld e, a                         ;   and save back the byte. This moves into the next char row.
+                        dec l                           ; Now retrieve the byte
+                        ld (hl), a                      ;   containing bits 0..2 of the Y coordinate,
+                        inc l                           ;   and
+                        xor a                           ;   reset it to zero, ensuring we start at the top of that char row.
+                        ld d, a                         ; Save that back to the byte, and also
+                        ld (hl), a                      ;   save the px-scrolled offset back to StarField.Table.
+Continue:
+mend
+

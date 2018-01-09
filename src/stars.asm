@@ -36,19 +36,16 @@ FrameLoop:
                         ld a, StarField.StarCount       ; Loop through this many times, once for each star.
 ResetLoop:
                         ex af, af'                      ; Save number of stars (loop counter).
-                        ld a, (hl)
-                        or %10000111                    ;      turn it into a "res n, a" instruction ($80 10nnn111),
-                        and %10111111
+                        ld a, (hl)                      ; Read the byte represnting the star pixel,
+                        or %10000111                    ;      turn it into a "res n, a" instruction ($80 10nnn111) by setting
+                        and %10111111                   ;      and clearing bits,
                         ld (ResetBit), a                ; SMC> then write this into the pixel-drawing code.
-                        inc l
-                        ld e, (hl)                      ; Read 2 bytes,
+                        inc l                           ; Read two
+                        ld e, (hl)                      ;   coordinate bytes,
                         inc l                           ;   for this star,
                         ld a, (hl)                      ;   into de.
                         and %00000111                   ; Constrain de between 0..2047
                         ld d, a                         ;   (size of top screen third).
-                        or %10000111                    ;      turn it into a "res n, a" instruction ($80 10nnn111),
-                        and %10111111
-                        ld (ResetBit), a                ; SMC> then write this into the pixel-drawing code.
                         ex de, hl                       ; Sawp the reading addr into de, and the writing addr into hl.
                         ld b, high(PixelAddress)        ; c stays 0, so this is a fast way of doing ld bc, $4000.
                         add hl, bc                      ; Calculate a pixel address in the top screen third.
@@ -70,17 +67,16 @@ ResetBit equ $+1:       set SMC, a                      ; <SMC  by setting that 
                         ld a, StarField.StarCount       ; Loop through this many times, once for each star.
 SetLoop:
                         ex af, af'                      ; Save number of stars (loop counter).
-                        ld a, (hl)
+                        ld a, (hl)                      ; Read the byte represnting the star pixel,
                         or %11000111                    ;      turn it into a "set n, a" instruction ($CB 11nnn111),
                         ld (SetBit), a                  ; SMC> then write this into the pixel-drawing code.
-                        inc l
-                        ld e, (hl)                      ; Read 2 bytes,
+                        inc l                           ; Read two
+                        ld e, (hl)                      ;   coordinate bytes,
                         inc l                           ;   for this star,
                         ld a, (hl)                      ;   into de.
                         and %00000111                   ; Constrain de between 0..2047
                         ld d, a                         ;   (size of top screen third).
-                        jp ScrollStar
-ScrollStarRet:
+                        ScrollStar()                    ; Macro to manipulate the Y coordinate.
                         ex de, hl                       ; Sawp the reading addr into de, and the writing addr into hl.
                         ld b, high(PixelAddress)        ; c stays 0, so this is a fast way of doing ld bc, $4000.
                         add hl, bc                      ; Calculate a pixel address in the top screen third.
@@ -106,31 +102,6 @@ SetBit  equ $+1:        set SMC, a                      ; <SMC  by setting that 
 CheckStarKeyPressRet:
 
                         jp FrameLoop                    ;      and rerun the routine again.
-pend
-
-
-
-ScrollStar              proc
-                        ld a, d
-                        and %00000111                   ; Calculate Y mod 8 (0..7)
-                        cp %00000111                    ; If 7 then
-                        jp z, CharScroll                ;   do a character scroll.
-                        ld a, d                         ; Otherwise do
-                        inc a                           ;   a pixel
-                        ld d, a                         ;   scroll.
-                        inc (hl)                        ; Save px-scrolled offset back to StarField.Table.
-                        jp SetupStars.ScrollStarRet
-CharScroll:
-                        ld a, e
-                        add 32
-                        ld e, a
-                        dec l
-                        ld (hl), a
-                        inc l
-                        xor a
-                        ld d, a
-                        ld (hl), a
-                        jp SetupStars.ScrollStarRet
 pend
 
 
