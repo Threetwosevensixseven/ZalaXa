@@ -27,11 +27,17 @@ Randomize:
 
 Seed equ $+1:           ld hl, SMC
 
-                        zeusdatabreakpoint 1, "zeusprinthex(1, hl)", $ ; Log current value of ROM table to debug window.
+                        ld hl, $26B1
+
+                        //zeusdatabreakpoint 1, "zeusprinthex(1, hl)", $ ; Log current value of ROM table to debug window.
                         ld de, StarField.Table
                         ld bc, StarField.Length
                         ldir
 FrameLoop:
+                        ld a, (ColourFlip)
+                        xor 3
+                        ld (ColourFlip), a
+
                         ld hl, StarField.Table          ; Starting point of ROM "psuedo-random" table (2 bytes per star). Try $03F3!
                         ld a, StarField.StarCount       ; Loop through this many times, once for each star.
 ResetLoop:
@@ -88,6 +94,22 @@ SetBit  equ $+1:        set SMC, a                      ; <SMC  by setting that 
                         ld (hl), a                      ; Draw the same single pixel star here, too.
                         add hl, bc                      ; hl is now a pixel address in the bottom screen third.
                         ld (hl), a                      ; Draw the same single pixel star here, too.
+
+                        ld h, %01011000
+Colour equ $+1:         ld a, SMC
+ColourFlip equ $+1:     jr SameColour
+                        dec a
+                        and %111
+SameColour:
+                        ld (hl), a
+
+                        ld h, %01011001
+                        ld (hl), a
+
+                        ld h, %01011010
+                        ld (hl), a
+
+                        ld c, 0
                         ex de, hl                       ; Swap the writing addr back into de, and reading addr into hl.
                         inc l
                         ex af, af'                      ; Retrieve the number of stars (loop counter),
@@ -98,7 +120,7 @@ SetBit  equ $+1:        set SMC, a                      ; <SMC  by setting that 
                         halt
                         di
 
-                        jp CheckStarKeyPress
+                        //jp CheckStarKeyPress
 CheckStarKeyPressRet:
 
                         jp FrameLoop                    ;      and rerun the routine again.
