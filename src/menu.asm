@@ -39,6 +39,8 @@ WaitForSpace:
                         ret z                             ; Otherwise return
                         jp AnimateStars
 AnimateStarsRet:
+                        call HighlightLogo
+
                         jp WaitForSpace
 pend
 
@@ -62,6 +64,78 @@ SetupGame               proc
                         PrintTextHL()                   ; Macro to print FZX proportional text with FZX
 
                         call NIRVANA_start              ; Enable NIRVANA+
+                        ret
+pend
+
+
+
+HighlightLogo           proc
+                        ld a, (FRAMES)
+                        and %1
+                        ret nz
+Colour equ $+1:         ld a, BrightBlackBlackP
+Direction:              inc a
+                        cp BrightWhiteBlackP+1
+                        jp nz, Low
+                        ld a, (Direction)
+                        xor 1
+                        ld (Direction), a
+                        ld a, BrightYellowBlackP
+Low:
+                        cp BrightBlackBlackP
+                        jp nz, SaveColour
+                        ld a, (Direction)
+                        xor 1
+                        ld (Direction), a
+                        ld a, BrightRedBlackP
+SaveColour:
+                        ld (Colour), a
+
+                        ld hl, zxattraddr(14*8, 4*8)
+                        ld de, zxattraddr(15*8, 4*8)
+                        ld bc, 4
+                        ld (hl), a
+                        ldir
+                        inc l
+                        inc l
+                        ld (hl), a
+                        inc l
+                        ld (hl), a
+
+                        ld hl, zxattraddr(10*8, 5*8)
+                        ld de, zxattraddr(11*8, 5*8)
+                        ld bc, 5
+                        ld (hl), a
+                        ldir
+                        inc l
+                        inc l
+                        inc l
+                        ld (hl), a
+                        inc l
+                        ld (hl), a
+                        inc l
+                        ld (hl), a
+                        inc l
+                        ld (hl), a
+
+                        ld hl, zxattraddr(10*8, 6*8)
+                        ld de, zxattraddr(11*8, 6*8)
+                        ld bc, 10
+                        ld (hl), a
+                        ldir
+
+                        ld hl, zxattraddr(10*8, 7*8)
+                        ld de, zxattraddr(11*8, 7*8)
+                        ld bc, 11
+                        ld (hl), a
+                        ldir
+
+                        ld hl, zxattraddr(10*8, 8*8)
+                        ld (hl), a
+
+                        ld hl, zxattraddr(17*8, 8*8)
+                        ld (hl), a
+
                         ret
 pend
 
