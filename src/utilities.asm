@@ -111,3 +111,39 @@ SkipDraw:
                         ret
 pend
 
+
+
+LevelChar8              proc
+CharTableSMC equ $+2:   ld ix, Char.Table
+                        ld a, (hl)                      ; Set a to LEVEL_n_TABLE.CharID
+                        ex de, hl
+                        ld l, a
+                        ld h, 0
+                        add hl, hl                      ; * 2
+                        add hl, hl                      ; * 4
+                        add hl, hl                      ; * 8
+                        ex de, hl
+                        add ix, de
+                        inc hl
+                        ld e, (hl)
+                        inc hl
+                        ld d, (hl)                      ; Set de to pixel address
+                        inc hl
+                        ex de, hl
+                        for line = 0 to 7
+                          ld a, (ix+line)
+                          ld (hl), a
+                          if line<7
+                            inc h
+                          endif
+                        next ;line
+                        ex de, hl
+                        ld e, (hl)
+                        inc hl
+                        ld d, (hl)                      ; Set de to pixel address
+                        inc hl
+                        ld a, (hl)                      ; Set a to attribute val
+                        inc hl
+                        ld (de), a
+                        ret
+pend

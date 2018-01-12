@@ -95,3 +95,12 @@ CharScroll:
 Continue:
 mend
 
+
+
+Char8                   macro(CharVal, Col8, Row8, AttrVal)
+                        db CharVal
+                        dw zxpixeladdr(Col8*8, Row8*8)
+                        dw zxattraddr (Col8*8, Row8*8)
+                        db AttrVal
+mend
+

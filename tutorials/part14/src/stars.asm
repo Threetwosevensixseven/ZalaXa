@@ -95,17 +95,15 @@ SetBit  equ $+1:        set SMC, a                      ; <SMC  by setting that 
                         add hl, bc                      ; hl is now a pixel address in the bottom screen third.
                         ld (hl), a                      ; Draw the same single pixel star here, too.
 
-                        ld h, %01011000
+                        ld h, %01011000                 ; Turn the pixel byte into an upper screen third attribute
 Colour equ $+1:         ld a, SMC
 ColourFlip equ $+1:     jr SameColour
                         dec a
                         and %111
 SameColour:
                         ld (hl), a
-
                         ld h, %01011001
                         ld (hl), a
-
                         ld h, %01011010
                         ld (hl), a
 

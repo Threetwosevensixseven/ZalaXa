@@ -10,6 +10,13 @@ SetupMenu               proc
 Randomize:
                         call ClsPixels                  ; Clear all the pixels.
 
+                        ld hl, ZalaXaLogo.ZChar
+                        ld bc, ZalaXaLogo.Count
+LogoLoop:               dec bc                          ; Loop bc times
+                        call LevelChar8                 ; Draw a character with 8x8 attributes
+                        ld a, b                         ; Set a=0 if bc=0
+                        or c
+                        jr nz, LogoLoop                 ; end loop
 
                         Print(MenuText, MenuText.Length); Print attributes on the screen using ROM routines
 
